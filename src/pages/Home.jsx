@@ -28,6 +28,9 @@ const Home = () => {
         <li>
           <Link to="/silverclublight">SilverclubLight</Link>
         </li>
+        <li>
+          <Link to ="/Chartlight">ChartLight</Link>
+        </li>
       </ul>
     </div>
   );
