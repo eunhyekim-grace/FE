@@ -1,0 +1,62 @@
+/* "bg-gray-100 border border-black-900 border-solid flex flex-col font-inter items-center justify-start mx-auto w-full pb-[10%]" */
+
+.day_background {
+    background: #f5f5f5; /* Equivalent to bg-gray-100 */
+    border: 1px solid #000; /* Equivalent to border border-black-900 border-solid */
+    display: flex;
+    flex-direction: column; /* Equivalent to flex flex-col */
+    font-family: 'Inter', sans-serif; /* Equivalent to font-inter */
+    align-items: center;
+    justify-content: flex-start; /* Equivalent to justify-start */
+    margin: 0 auto; /* Equivalent to mx-auto */
+    width: 100%;
+    padding-bottom: 10%; /* Equivalent to pb-[10%] */
+
+}
+
+.night_background {
+    background: #1e1d1d; /* Equivalent to bg-gray-100 #1e1d1d / 575757 */
+    border: 1px solid #000; /* Equivalent to border border-black-900 border-solid */
+    display: flex;
+    flex-direction: column; /* Equivalent to flex flex-col */
+    font-family: 'Inter', sans-serif; /* Equivalent to font-inter */
+    align-items: center;
+    justify-content: flex-start; /* Equivalent to justify-start */
+    margin: 0 auto; /* Equivalent to mx-auto */
+    width: 100%;
+    padding-bottom: 10%; /* Equivalent to pb-[10%] */
+}
+
+.night_text{
+    color:  #ffffff;
+    font-family: 'Yogi', sans-serif;
+    text-align: left;
+}
+
+.day_text{
+    color:  #000;
+    font-family: 'Yogi', sans-serif;
+    text-align: left;
+}
+
+.day_bar{
+    position: relative;
+    max-width: 90px;
+    background-color: #f5f5f5;
+    display: flex;
+    height: 100vh;
+    justify-content: flex-start;
+    overflow: auto;
+    top: 0;
+}
+
+.night_bar{
+    position: sticky;
+    max-width: 90px;
+    background-color: #575757;
+    display: flex;
+    height: 100vh;
+    justify-content: flex-start;
+    overflow: auto;
+    top: 0;
+}

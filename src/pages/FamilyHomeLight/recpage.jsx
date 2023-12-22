@@ -12,6 +12,11 @@ import 'styles/img.css'
 import 'styles/clicked.css'
 import 'styles/scroll.css'
 import 'styles/rerec.css'
+import 'styles/theme.css'
+
+
+// import { ReactComponent as IconA } from process.env.PUBLIC_URL + '/images/img_star_white.png'; // Import your SVG files
+// import { ReactComponent as IconB } from '../../../public/images/img_star_white.png';
 
 const LoadingScreen = () => {
     return (
@@ -397,7 +402,40 @@ function FamilyHomeLightPage() {
   // 스크롤 이벤트에 핸들러 추가
   window.addEventListener('scroll', handleScroll);
 
+
+  //시간 설정
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    // Update the current time every second
+      const interval = setInterval(() => {
+        setCurrentTime(new Date());
+    }, 1000);
+
+    // Cleanup the interval on component unmount
+    return () => clearInterval(interval);
+  }, []);
+
+  // Define a specific time for comparison (e.g., 12:00 PM)
+  const targetTime = new Date();
+  targetTime.setHours(10, 35, 0, 0);
+
+  // const [isaftertargetTime, setAfterTargetTime] = useState(false);
+
   
+  // Compare the current time with the target time
+  const isAfterTargetTime = currentTime > targetTime;
+
+  const BackgroundColor = isAfterTargetTime? 'night_background' : 'day_background';
+  const TextColor = isAfterTargetTime? 'night_text': 'day_text';
+  // const BarColor = isAfterTargetTime? 'night_bar': 'day_bar';
+  const BarColor = isAfterTargetTime? "!sticky !w-[90px] bg-white flex !h-screen justify-start overflow-auto top-[0]" : "!sticky !w-[90px] bg-gray-50 flex !h-screen justify-start overflow-auto top-[0]";
+  const DramaIcon  = isAfterTargetTime? process.env.PUBLIC_URL + '/images/img_star_white.svg': process.env.PUBLIC_URL + '/images/img_star.svg';
+  const SearchIcon = isAfterTargetTime? process.env.PUBLIC_URL + '/images/img_search_white.svg': process.env.PUBLIC_URL + '/images/img_search.svg';
+  const TopIcon = isAfterTargetTime? process.env.PUBLIC_URL + './images/img_top_white.svg': process.env.PUBLIC_URL + './images/img_top.svg';
+  const HomeIcon = isAfterTargetTime? process.env.PUBLIC_URL + './images/img_home_white.svg': process.env.PUBLIC_URL + './images/img_home.svg';
+  const MovieIcon = isAfterTargetTime? process.env.PUBLIC_URL + './images/img_thumbsup_white.svg': process.env.PUBLIC_URL + './images/img_thumbsup.svg';
+
 
   return (
     <>
@@ -407,7 +445,7 @@ function FamilyHomeLightPage() {
         classNames="fade"
        unmountOnExit
       >
-      <div className="bg-gray-100 border border-black-900 border-solid flex flex-col font-inter items-center justify-start mx-auto w-full pb-[10%]">
+      <div className={BackgroundColor}>
         <div className="flex flex-col items-center justify-start w-full">
           <div className="z-10 !sticky top-[0] overflow-block relative flex bg-red-A400 flex md:flex-col flex-row md:gap-5 items-start justify-end pb-1.5 px-1.5 w-full">
             <Img
@@ -433,17 +471,17 @@ function FamilyHomeLightPage() {
             </Text>
           </div>
           <div className="flex md:flex-col flex-row font-yogi md:gap-10 items-start justify-between mx-auto md:px-5 w-full">
-            <Sidebar className="!sticky !w-[90px] bg-gray-50 flex !h-screen justify-start overflow-auto top-[0]">
+            <Sidebar className="!sticky !w-[90px] bg-[#393939] flex !h-screen justify-start overflow-auto top-[0]"  >
               <div className="flex flex-col items-center justify-start mt-[105%] mx-auto w-[48%]">
                 <div className="flex flex-col items-start justify-start w-[80%] align-center" >
                   <Img
                     className="search"
-                    src="images/img_search.svg"
+                    src={SearchIcon}
                     alt="rewind"
                     onClick={ () => alert("현재 검색 기능은 준비 중입니다.")}
                   />
                   <Text
-                    className="ml-1 md:ml-[0] text-[15px] text-center text-gray-800 sm:text-lg md:text-xl tracking-[-2px]"
+                    className={isAfterTargetTime? "ml-1 md:ml-[0] text-[15px] text-center text-[#fff] sm:text-lg md:text-xl tracking-[-2px]": "ml-1 md:ml-[0] text-[15px] text-center text-gray-800 sm:text-lg md:text-xl tracking-[-2px]"}
                     size="txtYogi"
                   >
                     검색
@@ -453,12 +491,12 @@ function FamilyHomeLightPage() {
                 id ='top-button'>
                   <Img
                     className="top"
-                    src="images/top.png"
+                    src={TopIcon}
                     alt="rewind"
                     onClick={handleClick}
                   />
                   <Text
-                    className="text-[15px] mt-[-1%] text-center font-yogi text-gray-800 sm:text-lg md:text-xl tracking-[-0.5px]"
+                    className={isAfterTargetTime? "text-[15px] mt-[-1%] text-center font-yogi text-[#fff] sm:text-lg md:text-xl tracking-[-0.5px]" : "text-[15px] mt-[-1%] text-center font-yogi text-gray-800 sm:text-lg md:text-xl tracking-[-0.5px]"}
                     size="txtYogi"
                     onClick={handleClick}
                   >
@@ -472,7 +510,7 @@ function FamilyHomeLightPage() {
                 >
                   <Img
                     className="h-[55px] button"
-                    src="images/img_home.svg"
+                    src={HomeIcon}
                     alt="home"
                     onClick={scrollToRec}
                       //handleClick()};
@@ -480,7 +518,7 @@ function FamilyHomeLightPage() {
                     
                   />
                   <Text
-                    className="text-[15px] mt-[-1%] text-center font-yogi text-gray-800 sm:text-lg md:text-xl tracking-[-2px]"
+                    className={isAfterTargetTime? "text-[15px] mt-[-1%] text-center font-yogi text-[#fff] sm:text-lg md:text-xl tracking-[-2px]":"text-[15px] mt-[-1%] text-center font-yogi text-gray-800 sm:text-lg md:text-xl tracking-[-2px]"}
                     size="txtYogi"
                     onClick={scrollToRec}
                   >
@@ -493,12 +531,14 @@ function FamilyHomeLightPage() {
                   <Img
                     
                     className="h-[55px] button"
-                    src="images/img_star.svg"
+                    src= {DramaIcon}
+                    // src = {process.env.PUBLIC_URL + '/images/img_star_white.png'}
+                    // src = 'images/img_star_white.png'
                     alt="star"
                     onClick={scrollToDrama}
                   />
                   <Text
-                    className="text-[15px] mt-[-1%] text-center font-yogi text-gray-800 md:text-xl tracking-[-1px]"
+                    className={isAfterTargetTime? "text-[15px] mt-[-1%] text-center font-yogi text-[#fff] md:text-xl tracking-[-1px]": "text-[15px] mt-[-1%] text-center font-yogi text-gray-800 md:text-xl tracking-[-1px]"}
                     size="txtYogi"
                     onClick={scrollToDrama}
                     
@@ -510,12 +550,12 @@ function FamilyHomeLightPage() {
                 id="movie-button">
                   <Img
                     className="h-[55px] button"
-                    src="images/img_thumbsup.svg"
+                    src={MovieIcon}
                     alt="lock"
                     onClick={scrollToMovie}
                   />
                   <Text
-                    className="text-[15px] mt-[-1%] text-center text-gray-800 sm:text-lg md:text-xl tracking-[-0.11px]"
+                    className={isAfterTargetTime? "text-[15px] mt-[-1%] text-center text-[#fff] sm:text-lg md:text-xl tracking-[-0.11px]" : "text-[15px] mt-[-1%] text-center text-gray-800 sm:text-lg md:text-xl tracking-[-0.11px]"}
                     size="txtYogi"
                     onClick={scrollToMovie}
                   >
@@ -538,7 +578,7 @@ function FamilyHomeLightPage() {
                     className="leading-[10.00px] ml-[5.5%] pl-[50px] sm:text-[21px] md:text-[23px] text-[25px] text-black-900 tracking-[-0.13px] w-full font-yogi"
                     size="txtYogi"
                   >
-                    <span className="text-black-900 font-yogi text-left">
+                    <span className={TextColor}>
                       이달의 최신작{" "}
                     </span>
                     <span className="md:text-[46px] sm:text-[40px] text-red-A400 font-yellowtail text-left text-[50px] font-normal">
@@ -567,7 +607,7 @@ function FamilyHomeLightPage() {
                     className="leading-[10.00px] pl-[50px] ml-[5%] sm:text-[30px] md:text-[50px] text-[25px] text-black-900 tracking-[-0.13px] w-full font-yogi inline-block"
                     size="txtYogi"
                   >
-                    <span className="text-black-900 font-yogi">
+                    <span className={TextColor}>
                       주간 베스트{" "}
                     </span>
                     <span className="md:text-[46px] sm:text-[40px] text-red-A400 font-yellowtail text-[40px] font-normal ">
@@ -595,7 +635,7 @@ function FamilyHomeLightPage() {
                     <span className="md:text-[25px] sm:text-[25px] text-red-A400 font-yogi text-left text-[30px] font-normal">
                     {localStorage.getItem('subsr')}&nbsp;
                     </span>
-                    <span className="text-black-900 text-left font-yogi">
+                    <span className={TextColor}>
                      님이 시청중인{" "}
                     </span>
                     <span className="md:text-[46px] sm:text-[40px] text-red-A400 font-yellowtail text-left text-[50px] font-normal">
@@ -640,7 +680,7 @@ function FamilyHomeLightPage() {
                     className="leading-[100.00px] ml-[1.4%] pl-[50px] sm:text-[21px] md:text-[23px] text-[25px] text-black-900 tracking-[-0.13px] w-full"
                     size="txtYogi"
                   >
-            <span className="text-black-900 font-yogi text-left">
+            <span className={TextColor}>
               {localStorage.getItem('new') ? `당신의 선택한 장르 기반 추천 ` : `당신의 취향저격 장르 추천 `}
             </span>
             <span className="md:text-[46px] sm:text-[40px] text-red-A400 font-yellowtail text-left text-[50px] font-normal">
@@ -675,7 +715,7 @@ function FamilyHomeLightPage() {
                     className="leading-[100.00px] ml-[1.4%] pl-[50px] sm:text-[21px] md:text-[23px] text-[25px] text-black-900 tracking-[-0.13px] w-full"
                     size="txtYogi"
                   >
-                    <span className="text-black-900 text-left font-yogi">
+                    <span className={TextColor}>
                       당신과 비슷한 유저들이 즐겨봐요{" "}
                     </span>
                     <span className="md:text-[46px] sm:text-[40px] text-red-A400 font-yellowtail text-left text-[50px]">
@@ -713,7 +753,7 @@ function FamilyHomeLightPage() {
                     className="leading-[100.00px] ml-[1.4%] pl-[50px] sm:text-[21px] md:text-[23px] text-[25px] text-black-900 tracking-[-0.13px] w-full"
                     size="txtYogi"
                   >
-                    <span className="text-black-900 text-left font-yogi">
+                    <span className={TextColor}>
                       당신을 위한 드라마 추천{" "}
                     </span>
                     <span className="md:text-[46px] sm:text-[40px] text-red-A400 font-yellowtail text-left text-[50px]">

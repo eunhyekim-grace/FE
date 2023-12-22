@@ -11,6 +11,7 @@ const Light = React.lazy(() => import("pages/Light"));
 const FamilyHomeLight = React.lazy(() => import("pages/FamilyHomeLight/recpage"));
 const LoginPageLight = React.lazy(() => import("pages/LoginPageLight/l_login"));
 const ChartLight = React.lazy(() => import("pages/ChartLight/index"));
+const SpeechLight = React.lazy(() => import("pages/SpeechLight/speech"));
 
 
 const ProjectRoutes = () => {
@@ -28,6 +29,7 @@ const ProjectRoutes = () => {
           <Route path="/dhiwise-dashboard" element={<Home />} />
           <Route path="/Light/:programId" element={<Light />} />
           <Route path="/chart_sample" element= {<ChartLight/>}  />
+          <Route path="/speech_test" element={<SpeechLight/>} />
 
         </Routes>
       </Router>
