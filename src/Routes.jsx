@@ -12,6 +12,7 @@ const FamilyHomeLight = React.lazy(() => import("pages/FamilyHomeLight/recpage")
 const LoginPageLight = React.lazy(() => import("pages/LoginPageLight/l_login"));
 const ChartLight = React.lazy(() => import("pages/ChartLight/index"));
 const SpeechLight = React.lazy(() => import("pages/SpeechLight/speech"));
+const CP = React.lazy(() => import("pages/cc/chart"));
 
 
 const ProjectRoutes = () => {
@@ -30,6 +31,7 @@ const ProjectRoutes = () => {
           <Route path="/Light/:programId" element={<Light />} />
           <Route path="/chart_sample" element= {<ChartLight/>}  />
           <Route path="/speech_test" element={<SpeechLight/>} />
+          <Route path="/ch" element={<CP />} />
 
         </Routes>
       </Router>
